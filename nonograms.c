@@ -9,13 +9,13 @@
 
 
 struct Nonogram{
-int size;
+    int size;
 
 };
 
 struct queueNode {
-int data; // define data as a char
-struct queueNode *nextPtr; // queueNode pointer
+    int data; // define data as a char
+    struct queueNode *nextPtr; // queueNode pointer
 };
 
 typedef struct queueNode QueueNode;
@@ -56,13 +56,47 @@ int main(int argc, char *argv[]){
             count++;
         }
     }
-    
 
     //make grid
     char *grid[SIZE][SIZE];
     for (int i=0;i<SIZE;i++){
         for (int j=0;j<SIZE;j++){
             grid[i][j] = "0";
+            printf("%s",grid[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+
+    int gap = 0;
+    int val = 0;
+    int gridwalk = 0;
+    //first iteration rows
+    for (int j=0; j < SIZE; j++)
+    {
+        gap = SIZE+1;
+        for(int k=0; k < SIZE; k++){
+            val = *(*(string+j)+k) - '0';
+            if (val > 0){
+            gap -= (val+1);
+            }
+        }
+        printf("%d\n\n",gap);
+        gridwalk = gap;
+        for(int k=0; k < SIZE; k++){
+            val = *(*(string+j)+k) - '0'-gap;
+            printf("%d\n",val);
+            for(int v=0;v<val;v++){
+                grid[j][gridwalk] = "1";
+                gridwalk++;
+            }
+            gridwalk+=(gap+1);
+        }
+    }
+    
+    for (int i=0;i<SIZE;i++){
+        for (int j=0;j<SIZE;j++){
             printf("%s",grid[i][j]);
         }
         printf("\n");
