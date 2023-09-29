@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
     int val = 0;
     int gridwalk = 0;
     //first iteration rows
-    for (int j=0; j < SIZE; j++)
+    for (int j=0; j < SIZE*2; j++)
     {
         gap = SIZE+1;
         for(int k=0; k < SIZE; k++){
@@ -88,7 +88,11 @@ int main(int argc, char *argv[]){
             val = *(*(string+j)+k) - '0'-gap;
             printf("%d\n",val);
             for(int v=0;v<val;v++){
-                grid[j][gridwalk] = "1";
+                if(j<SIZE){
+                    grid[j][gridwalk] = "1";
+                }else{
+                    grid[gridwalk][j-SIZE] = "1";
+                }
                 gridwalk++;
             }
             gridwalk+=(gap+1);
